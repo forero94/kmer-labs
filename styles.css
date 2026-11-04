@@ -69,6 +69,7 @@
 
     --paper: #ffffff;
     --paper-raised: #ffffff;
+    --photo-filter: none;
     --paper-sunken: #f6f3f2;
     --ink: #231f20;
     --ink-soft: #4a4446;
@@ -122,6 +123,7 @@
 
         --paper: #141213;
         --paper-raised: #1d1a1b;
+        --photo-filter: brightness(.85);   /* la foto blanca encandila sobre fondo oscuro */
         --paper-sunken: #0f0d0e;
         --ink: #f3eeee;
         --ink-soft: #cdc5c6;
@@ -153,6 +155,7 @@
 
     --paper: #141213;
     --paper-raised: #1d1a1b;
+    --photo-filter: brightness(.85);
     --paper-sunken: #0f0d0e;
     --ink: #f3eeee;
     --ink-soft: #cdc5c6;
@@ -241,7 +244,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }   /* que un #ancla
 .wrap--narrow { max-width: 46rem; }
 
 .section { padding-block: clamp(4rem, 10vw, 7rem); }
-.section + .section { border-top: 1px solid var(--rule); }
+.section + .section,
+.hero + .section { border-top: 1px solid var(--rule); }
 .section--sunken { background: var(--paper-sunken); }
 
 /* El rótulo en mayúsculas espaciadas es el de la tarjeta, en mono, numerado
@@ -501,93 +505,104 @@ body { counter-reset: seccion; }
 @keyframes mark-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @keyframes mark-ink { from { opacity: 0; } }
 
-/* ---------- La franja del nombre: un k-mer recorriendo la secuencia ---------- */
+/* ---------- El nombre: el k-mer y el nanoporo ---------- */
+/* Va al final, entre «Quién» y el contacto: abajo ya lo separa el rojo */
 .kmer {
-    border-block: 1px solid var(--rule);
-    padding-block: clamp(2rem, 5vw, 2.75rem);
+    border-top: 1px solid var(--rule);
+    padding-block: clamp(3rem, 7vw, 4.5rem);
 }
 
-.kmer__inner {
-    display: flex;
-    flex-wrap: wrap;
+/* El texto a la izquierda y el poro a la derecha; en el celular, uno debajo del otro */
+.kmer__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(15rem, 25rem);
+    gap: 2rem clamp(2rem, 6vw, 5rem);
     align-items: center;
-    gap: 1.5rem clamp(2rem, 5vw, 4rem);
 }
 
-/* Cada base ocupa una celda fija, así la ventana avanza de a una base
-   exacta. --n es cuántas bases se ven y --steps las posiciones de la
-   ventana (n - k + 1); van por separado porque steps() no acepta calc()
-   en todos los navegadores. Las bases que sobran quedan recortadas. */
-.kmer__seq {
-    --cell: 1.45em;
-    --k: 5;
-    --n: 16;
-    --steps: 12;
-    position: relative;
-    isolation: isolate;
-    display: flex;
-    flex-shrink: 0;
-    width: calc(var(--n) * var(--cell));
-    overflow: hidden;
-    padding-top: 1.8em;   /* lugar para el rótulo «k = 5» */
-    font-family: var(--font-mono);
-    font-size: clamp(.75rem, 3.6vw, 1rem);
-    color: var(--ink-soft);
-}
-
-.kmer__seq > span:not(.kmer__win) {
-    flex: 0 0 var(--cell);
-    text-align: center;
-    line-height: 2.3;
-}
-
-/* La ventana va detrás de las letras para no taparlas */
-.kmer__win {
-    position: absolute;
-    z-index: -1;
-    left: 0;
-    top: 1.8em;
-    bottom: 0;
-    width: calc(var(--k) * var(--cell));
-    border: 1.5px solid var(--accent);
-    border-radius: 1px;
-    background: var(--accent-wash);
-    animation: kmer-slide calc(var(--steps) * .6s) steps(var(--steps), jump-none) infinite;
-}
-
-.kmer__k {
-    position: absolute;
-    bottom: 100%;
-    left: -1.5px;
-    margin-bottom: .35em;
-    font-family: var(--font-mono);
-    font-size: .72rem;
-    font-weight: 500;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    white-space: nowrap;
-}
-
-@keyframes kmer-slide { to { translate: calc((var(--n) - var(--k)) * var(--cell)) 0; } }
-
-@media (min-width: 46rem) {
-    .kmer__seq { --n: 24; --steps: 20; }
+@media (max-width: 46rem) {
+    .kmer__grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 .kmer__def {
-    flex: 1 1 18rem;
+    max-width: 60ch;
     margin: 0;
-    font-size: .95rem;
-    color: var(--ink-muted);
-    max-width: 42ch;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
 }
 
 .kmer__def dfn {
     font-family: var(--font-display);
     font-style: normal;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--ink);
+}
+
+.kmer__fig { margin: 0; }
+
+/* ---- el poro mínimo: todo en angstroms (ver index.html) ---- */
+/* Los trazos finos no escalan con la figura: miden 1px a cualquier tamaño */
+.poro-min { display: block; width: 100%; height: auto; overflow: visible; }
+
+.pm-memb { fill: var(--paper-sunken); }
+
+.pm-proteina {
+    fill: color-mix(in srgb, var(--ink) 13%, var(--paper));
+    stroke: color-mix(in srgb, var(--ink) 45%, var(--paper));
+    stroke-width: 1;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+/* el péptido de CsgF, que agrega la segunda constricción, un tono más oscuro */
+.pm-proteina--f {
+    fill: color-mix(in srgb, var(--ink) 34%, var(--paper));
+    stroke: color-mix(in srgb, var(--ink) 62%, var(--paper));
+}
+
+.pm-eje { stroke: var(--ink-soft); stroke-width: .6; }
+
+/* cada base: una cápsula con su letra, del alto real de un nucleótido */
+.pm-base { stroke: var(--ink); stroke-width: 4.4; stroke-linecap: round; }
+
+.pm-letra {
+    font-family: var(--font-mono);
+    font-size: 4px;
+    font-weight: 500;
+    fill: var(--paper);
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+/* la copia que se ve dentro de la ventana: lo que el poro está leyendo */
+.pm-hebra--leida .pm-eje,
+.pm-hebra--leida .pm-base { stroke: var(--mark-red); }
+.pm-hebra--leida .pm-letra { fill: #fff; }
+
+.pm-ventana,
+.pm-guia {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.2;
+    vector-effect: non-scaling-stroke;
+}
+
+.pm-kmer { font-family: var(--font-mono); font-size: 7px; font-weight: 500; fill: var(--accent); }
+.pm-k { font-family: var(--font-mono); font-size: 4.6px; fill: var(--ink-muted); }
+
+/* La hebra baja 16 bases (16 × 6,3 Å) en 8 segundos y vuelve a empezar.
+   Con movimiento reducido queda quieta (la regla general de arriba). */
+.pm-hebra { animation: hebra-baja 8s linear infinite; }
+
+@keyframes hebra-baja { to { transform: translateY(100.8px); } }
+
+.kmer__cap {
+    margin-top: 1rem;
+    padding-top: .9rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    color: var(--ink-muted);
 }
 
 /* ---------- Botones ---------- */
@@ -879,46 +894,30 @@ body { counter-reset: seccion; }
 /* ---------- Quién ---------- */
 .profile {
     display: grid;
-    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-    gap: clamp(2rem, 5vw, 3.5rem);
-    align-items: start;
+    grid-template-columns: clamp(7rem, 16vw, 11rem) minmax(0, 40rem);
+    gap: clamp(1.25rem, 4vw, 2.5rem);
+    align-items: center;
 }
 
-@media (max-width: 46rem) {
-    .profile { grid-template-columns: 1fr; }
+.profile__photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+    filter: var(--photo-filter);
 }
 
+.profile .section__title { margin-bottom: .75rem; }
 .profile p { color: var(--ink-soft); }
 .profile .lead { color: var(--ink); }
+.profile p:last-child { margin-bottom: 0; }
 
-.facts {
-    list-style: none;
-    margin: 0;
-    padding: 1.5rem;
-    background: var(--paper-raised);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    font-size: .95rem;
+/* En el celular la foto queda chica al lado del nombre, como en la tarjeta */
+@media (max-width: 30rem) {
+    .profile { grid-template-columns: 5.5rem minmax(0, 1fr); align-items: start; }
 }
-
-.facts li {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    padding-block: .55rem;
-    border-bottom: 1px solid var(--rule);
-}
-
-.facts li:last-child { border-bottom: 0; padding-bottom: 0; }
-.facts .k {
-    color: var(--ink-muted);
-    font-family: var(--font-mono);
-    font-size: .75rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-}
-.facts .v { font-weight: 600; text-align: right; }
 
 /* ---------- Contacto: el dorso de la tarjeta ---------- */
 .contact {

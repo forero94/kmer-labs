@@ -1,19 +1,23 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-AR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nanoporo: uno y dos cabezales de lectura</title>
+<title>Nanoporo: uno y dos cabezales de lectura | K-mer Labs</title>
 <meta name="description" content="Animación de cómo lee un nanoporo: el poro R9.4.1, con un cabezal de lectura, y el R10.4.1, con dos, dibujados a partir de la estructura PDB 6SI7.">
+<link rel="canonical" href="https://kmer-labs.com.ar/poro.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_AR">
 <meta property="og:title" content="Nanoporo: uno y dos cabezales de lectura">
 <meta property="og:description" content="Animación de cómo lee un nanoporo: el poro R9.4.1, con un cabezal de lectura, y el R10.4.1, con dos, dibujados a partir de la estructura PDB 6SI7.">
 <!--
   Dos salidas desde la misma fuente:
-    - abierto tal cual: la versión animada
+    - abierto tal cual: la versión animada, con la barra del sitio y el epígrafe. La portada
+      (sección «El nombre») tiene una versión mínima propia y enlaza a esta
     - con ?estatico al final de la dirección: un cuadro fijo, sin controles ni epígrafe
-  Autocontenido: no carga nada de afuera.
+  En pantallas de menos de 640 px queda sólo el panel del R10.4.1, con los rótulos principales.
+  Colores y tipografías salen de styles.css: es la misma estética del resto del sitio.
 
   Las proteínas son el corte real de la estructura PDB 6SI7 (CsgG:CsgF, crio-ME 3,4 Å;
   Van der Verren et al. 2020, Nat Biotechnol 38:1415, doi:10.1038/s41587-020-0570-8); el bloque
@@ -23,27 +27,141 @@
   Esquemáticos: el motor (sin estructura pública) y la posición de la membrana.
   La señal es ilustrativa (un modelo de juguete por k-mer), no datos de secuenciación.
 -->
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'dark' || saved === 'light') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) { /* localStorage bloqueado: queda la preferencia del sistema */ }
+  }());
+</script>
+<link rel="stylesheet" href="styles.css?v=12">
 <style>
+  /* La figura con los colores del sitio: las proteínas en grises cálidos, lo esquemático
+     (motor y membrana) con trazo punteado, como las líneas de construcción del logo, y el
+     rojo de la marca sólo para lo que el poro está leyendo: el cabezal y sus bases. */
   :root {
-    --ink: #1f2328; --ink2: #3d444d; --mut: #6b7280; --borde: #c9ced4; --fondo: #ffffff;
+    --csgg: #ddd6d4; --csgg-borde: #8c8385;
+    --csgf: #9a9193; --csgf-borde: #4a4446;
+    --motor: #f6f3f2; --motor2: #eeeae9; --cuna: #e4dedc; --motor-borde: #8c8385;
+    --memb: #f6f3f2; --memb-banda: #e7e2e1;
+    --adn: #4a4446;
+    --base: #231f20; --base-letra: #ffffff;
+    --base-compl: #cfc8c7; --base-compl-letra: #231f20;
+    --leida: var(--mark-red);
+    --halo: rgba(142, 19, 34, .12);
   }
-  html, body { margin: 0; background: var(--fondo); color: var(--ink);
-               font-family: Arial, Helvetica, sans-serif; }
-  main { max-width: 1200px; margin: 0 auto; padding: 16px; }
-  svg { display: block; width: 100%; height: auto; }
-  .controles { display: flex; gap: 12px; align-items: center; margin-top: 8px; }
-  button { font: inherit; font-size: 15px; padding: 6px 14px; border: 1px solid var(--borde);
-           border-radius: 6px; background: var(--fondo); color: var(--ink); cursor: pointer; }
-  button:focus-visible { outline: 2px solid var(--ink2); outline-offset: 2px; }
-  .clave { display: flex; gap: 14px; font-size: 15px; font-weight: 700; color: var(--ink2); }
-  .clave span { display: inline-flex; align-items: center; gap: 5px; }
-  .clave i { display: inline-block; width: 22px; height: 14px; border-radius: 7px; }
-  .epigrafe { font-size: 15px; line-height: 1.55; color: var(--ink2); max-width: 900px; }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --csgg: #3b3537; --csgg-borde: #6f6769;
+      --csgf: #6f6769; --csgf-borde: #b8adaf;
+      --motor: #1d1a1b; --motor2: #232021; --cuna: #2b2628; --motor-borde: #6f6769;
+      --memb: #1b1819; --memb-banda: #262123;
+      --adn: #b8adaf;
+      --base: #e9e3e3; --base-letra: #141213;
+      --base-compl: #4b4446; --base-compl-letra: #e9e3e3;
+      --halo: rgba(194, 51, 69, .22);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --csgg: #3b3537; --csgg-borde: #6f6769;
+    --csgf: #6f6769; --csgf-borde: #b8adaf;
+    --motor: #1d1a1b; --motor2: #232021; --cuna: #2b2628; --motor-borde: #6f6769;
+    --memb: #1b1819; --memb-banda: #262123;
+    --adn: #b8adaf;
+    --base: #e9e3e3; --base-letra: #141213;
+    --base-compl: #4b4446; --base-compl-letra: #e9e3e3;
+    --halo: rgba(194, 51, 69, .22);
+  }
+
+  main { max-width: 66rem; margin: 0 auto; padding: clamp(1.5rem, 4vw, 3rem) var(--gutter); }
+  #poro { display: block; width: 100%; height: auto; }
+
+  /* ---- la figura ---- */
+  .csgg { fill: var(--csgg); stroke: var(--csgg-borde); stroke-width: 1.5; stroke-linejoin: round; }
+  .csgf { fill: var(--csgf); stroke: var(--csgf-borde); stroke-width: 1.5; stroke-linejoin: round; }
+  .motor, .cuna { stroke: var(--motor-borde); stroke-width: 1.4; stroke-dasharray: 5 3; stroke-linejoin: round; }
+  .motor { fill: var(--motor); }
+  .motor--2 { fill: var(--motor2); }
+  .cuna { fill: var(--cuna); }
+  .memb { fill: var(--memb); }
+  .memb-banda { fill: var(--memb-banda); }
+  .halo { fill: var(--halo); }
+  .adn { fill: none; stroke: var(--adn); stroke-width: 2.5; stroke-linejoin: round; }
+
+  .base line { stroke: var(--base); }
+  .base text { fill: var(--base-letra); font-family: var(--font-mono); font-weight: 500; }
+  .base--compl line { stroke: var(--base-compl); }
+  .base--compl text { fill: var(--base-compl-letra); }
+  .base--leida line { stroke: var(--leida); }
+  .base--leida text { fill: #fff; }
+
+  .guia { stroke: var(--ink-muted); stroke-width: 1.2; stroke-dasharray: 4 3; }
+  .guia--cabezal { stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: none; }
+  .llave { fill: none; stroke: var(--accent); stroke-width: 2; }
+  .traza { fill: none; stroke: var(--ink); stroke-width: 1.8; stroke-linejoin: round; }
+  .eje { stroke: var(--rule-strong); stroke-width: 1.5; }
+  .eje--fino { stroke: var(--rule); stroke-width: 1; stroke-dasharray: 3 4; }
+
+  /* los rótulos: títulos en la serif, datos y etiquetas en la mono, notas en la sans */
+  .rot-titulo { font-family: var(--font-display); font-weight: 500; fill: var(--ink); }
+  .rot-sub { font-family: var(--font-mono); font-weight: 500; letter-spacing: .1em; fill: var(--accent); }
+  .rot-dato, .rot-etiqueta { font-family: var(--font-mono); fill: var(--ink-muted); }
+  .rot-etiqueta { letter-spacing: .04em; }
+  .rot-proteina { fill: var(--ink-soft); font-weight: 500; }
+  .rot-clave { font-family: var(--font-body); font-weight: 600; fill: var(--ink-soft); }
+  .rot-cabezal { fill: var(--accent); }
+  .rot-nota { font-family: var(--font-body); fill: var(--ink-muted); }
+  .rot-llave { font-family: var(--font-mono); font-weight: 500; fill: var(--accent); }
+
+  /* ---- controles y epígrafe ---- */
+  .controles { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; align-items: center; margin-top: 1rem; }
+  .controles .btn { padding: .45rem 1rem; font-size: .9rem; }
+  .clave {
+    display: inline-flex; align-items: center; gap: .55rem;
+    font-family: var(--font-mono); font-size: .75rem; letter-spacing: .04em; color: var(--ink-muted);
+  }
+  .clave i { display: inline-block; width: 22px; height: 12px; border-radius: 6px; background: var(--leida); }
+  .epigrafe { margin-top: 1.5rem; font-size: .95rem; line-height: 1.65; color: var(--ink-soft); max-width: 72ch; }
+
+  /* ---- las salidas ---- */
   body.estatico main { max-width: none; padding: 0; }
-  body.estatico .controles, body.estatico .epigrafe { display: none; }
+  body.estatico .nav, body.estatico .controles, body.estatico .epigrafe { display: none; }
+
+  /* angosta: sólo el R10.4.1, con título, subtítulo y cabezales, en letra más grande */
+  body.compacto .panel--1,
+  body.compacto .rot-opcional, body.compacto .rot-nota, body.compacto .rot-etiqueta,
+  body.compacto .guia-opcional { display: none; }
+  body.compacto .rot-titulo { font-size: 42px; }
+  body.compacto .rot-sub { font-size: 26px; transform: translateY(12px); }   /* el título más grande lo pisaba */
+  body.compacto .rot-cabezal { font-size: 28px; }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="kmer-mark" viewBox="0 0 100 100">
+    <path style="fill:var(--mark-red)" d="M0 0A50 50 0 0 0 50 50H0Z" />
+    <path style="fill:var(--mark-red)" d="M100 0V100A50 50 0 0 0 50 50A50 50 0 0 0 100 0Z" />
+    <path style="fill:none;stroke:var(--mark-line);stroke-width:var(--mark-stroke, 1.9)" d="M50 0V100" />
+    <path style="fill:none;stroke:var(--mark-red);stroke-width:var(--mark-stroke, 1.9)" d="M2.5 2.5H97.5V97.5H2.5Z" />
+  </symbol>
+</svg>
+
+<nav class="nav" aria-label="Principal">
+  <div class="wrap">
+    <div class="nav__bar">
+      <a class="nav__brand" href="./">
+        <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true"><use href="#kmer-mark" /></svg>
+        K-mer Labs
+      </a>
+    </div>
+  </div>
+</nav>
+
 <main>
   <svg id="poro" viewBox="0 0 1600 1000" role="img" aria-labelledby="poro-t poro-d"
        xmlns="http://www.w3.org/2000/svg">
@@ -53,8 +171,8 @@
       corriente eléctrica. El poro R10.4.1 tiene dos constricciones.</desc>
   </svg>
   <div class="controles">
-    <button id="pausa" type="button">Pausar</button>
-    <span class="clave" id="clave" aria-label="Color de cada base"></span>
+    <button class="btn btn--ghost" id="pausa" type="button">Pausar</button>
+    <span class="clave"><i aria-hidden="true"></i>bases dentro de un cabezal de lectura</span>
   </div>
   <p class="epigrafe">
     Corte de las proteínas del poro a partir de su estructura (CsgG y CsgG:CsgF, PDB 6SI7). El ADN
@@ -85,7 +203,11 @@
   // La versión estática va sin textos ni líneas guía; ?estatico&rotulos la devuelve con textos.
   // La animada los lleva siempre.
   const ROTULOS = !ESTATICO || PARAMS.has("rotulos");
-  if (!ROTULOS) svg.setAttribute("viewBox", "40 100 1520 850");   // sin la franja de títulos
+  // encuadres: la estática conserva los de siempre (es para exportar figuras); la animada se
+  // recorta al dibujo, para que quede alineada con el texto de la página
+  const VISTA = !ESTATICO ? "50 20 1500 975"
+              : ROTULOS ? "0 0 1600 1000" : "40 100 1520 850";   // sin rótulos, sin la franja de títulos
+  const VISTA_COMPACTA = "850 20 715 975";                        // sólo el panel del R10.4.1
 
   // ---- escala: angstroms -> px. x a lo ancho, z sobre el eje (+z = cis, arriba)
   const S = 3.2, Y = z => 300 + (42 - z) * S;
@@ -113,14 +235,9 @@
   const ZG = GEO.constriccion_csgg.z, ZF = GEO.constriccion_csgf.z;
   const DESFASE = Math.round((ZG - ZF) / ANG_BASE);   // bases entre los dos cabezales
   const MEMB = [-51, -25];                    // membrana: posición aproximada, sobre el barril
-  const C = {
-    csgg: "#8e9aab", csggBorde: "#6f7b8b", csgf: "#4f5b6b", csgfBorde: "#3c4654",
-    motor: "#c9d6e8", motor2: "#b7c7de", cuna: "#a3b6d1", motorBorde: "#7f8fa6", memb: "#ece8df", membBanda: "#d6cfbf",
-    adn: "#3d444d", luz: "#f2b705", luzBase: "#a87a00",
-    ink: "#1f2328", ink2: "#3d444d", mut: "#6b7280", grilla: "#e5e7eb",
-  };
-  const FUENTE = "Arial, Helvetica, sans-serif";
 
+  // Los colores no van en el dibujo sino en clases (el <style> de arriba): así siguen el tema
+  // claro u oscuro del sitio sin redibujar nada.
   function el(tag, attrs, padre) {
     const e = document.createElementNS(NS, tag);
     for (const k in attrs) e.setAttribute(k, attrs[k]);
@@ -132,7 +249,7 @@
     return ROTULOS ? el(tag, attrs, padre) : document.createElementNS(NS, tag);
   }
   function texto(x, y, lineas, attrs, padre) {
-    const t = guia("text", Object.assign({ x, y, "font-family": FUENTE }, attrs), padre);
+    const t = guia("text", Object.assign({ x, y }, attrs), padre);
     [].concat(lineas).forEach((s, i) => {
       const ts = el("tspan", { x, dy: i === 0 ? 0 : "1.15em" }, t);
       ts.textContent = s;
@@ -145,41 +262,30 @@
                      (_, x, z) => `${(cx + parseFloat(x) * S).toFixed(1)},${Y(parseFloat(z)).toFixed(1)}`);
   }
 
-  // ---- bases: una cápsula con el color de la base (el de los electroferogramas de Sanger) y
-  // su letra; el borde dorado marca las que están dentro de un cabezal de lectura
-  const COLOR_BASE = { A: "#2e8540", C: "#2563b0", G: "#1f2328", T: "#c62828" };
+  // ---- bases: una cápsula con su letra. Tinta en la hebra molde, gris en la complementaria y
+  // el rojo de la marca mientras está dentro de un cabezal de lectura: lo que el poro está leyendo
   const COMPLEMENTO = { A: "T", C: "G", G: "C", T: "A" };
-  for (const [letra, color] of Object.entries(COLOR_BASE)) {
-    const s = document.createElement("span"), i = document.createElement("i");
-    i.style.background = color;
-    s.append(i, letra);
-    document.getElementById("clave").appendChild(s);
-  }
   const ANCHO_SIMPLE = 14, ANCHO_PAR = 6;      // px: grosor de la cápsula en hebra simple y doble
   const M_SIMPLE = 1.5, M_PAR = 1.0;           // Å: media longitud de la cápsula, sin las puntas
   function nuevaBase(padre, conLetra) {
-    const g = el("g", {}, padre);
+    const g = el("g", { class: "base" }, padre);
     return {
       g,
-      borde: el("line", { stroke: C.luzBase, "stroke-width": ANCHO_SIMPLE + 6,
-                          "stroke-linecap": "round" }, g),
       capsula: el("line", { "stroke-linecap": "round" }, g),
-      letra: conLetra ? el("text", { "font-family": FUENTE, "font-size": 12, "font-weight": 700,
-                                     fill: "#ffffff", "text-anchor": "middle",
+      letra: conLetra ? el("text", { "font-size": 12, "text-anchor": "middle",
                                      "dominant-baseline": "central" }, g) : null,
     };
   }
-  // la ubica centrada en (x, z) Å, con el eje en la dirección (ux, uz); base null la esconde
-  function ponerBase(B, X, x, z, ux, uz, m, ancho, base, leida) {
+  // la ubica centrada en (x, z) Å, con el eje en la dirección (ux, uz); base null la esconde.
+  // clase: "base", "base base--compl" o "base base--leida"
+  function ponerBase(B, X, x, z, ux, uz, m, ancho, base, clase) {
     B.g.setAttribute("display", base ? "inline" : "none");
     if (!base) return;
-    for (const linea of [B.borde, B.capsula]) {
-      linea.setAttribute("x1", X(x - m * ux).toFixed(1)); linea.setAttribute("y1", Y(z - m * uz).toFixed(1));
-      linea.setAttribute("x2", X(x + m * ux).toFixed(1)); linea.setAttribute("y2", Y(z + m * uz).toFixed(1));
-    }
-    B.capsula.setAttribute("stroke", COLOR_BASE[base]);
-    B.capsula.setAttribute("stroke-width", ancho);
-    B.borde.setAttribute("display", leida ? "inline" : "none");
+    const l = B.capsula;
+    l.setAttribute("x1", X(x - m * ux).toFixed(1)); l.setAttribute("y1", Y(z - m * uz).toFixed(1));
+    l.setAttribute("x2", X(x + m * ux).toFixed(1)); l.setAttribute("y2", Y(z + m * uz).toFixed(1));
+    l.setAttribute("stroke-width", ancho);
+    if (B.g.getAttribute("class") !== clase) B.g.setAttribute("class", clase);
     if (B.letra) {
       B.letra.setAttribute("x", X(x).toFixed(1)); B.letra.setAttribute("y", Y(z).toFixed(1));
       B.letra.textContent = base;
@@ -232,116 +338,114 @@
     return v + 0.035 * RUIDO[mod(m, N * MUESTRAS)];
   }
 
-  // ---- dibujo de cada panel; devuelve lo que se mueve
-  const dinamicos = PANELES.map(P => {
+  // ---- dibujo de cada panel; devuelve lo que se mueve. Los rótulos que sobran en pantalla
+  // angosta llevan rot-opcional, rot-nota o rot-etiqueta (las esconde el CSS de body.compacto)
+  const dinamicos = PANELES.map((P, n) => {
     const cx = P.x0 + 360, X = x => cx + x * S;
-    const g = el("g", {});
+    const g = el("g", { class: `panel panel--${n + 1}` });
 
-    texto(P.x0 + 20, 58, P.titulo, { "font-size": 34, "font-weight": 700, fill: C.ink }, g);
-    texto(P.x0 + 20, 96, P.sub, { "font-size": 26, "font-weight": 700, fill: C.luzBase }, g);
-    texto(P.x0 + 20, 128, `${P.motor} · ${P.vel}`, { "font-size": 20, fill: C.mut }, g);
+    texto(P.x0 + 20, 58, P.titulo, { "font-size": 34, class: "rot-titulo" }, g);
+    texto(P.x0 + 20, 94, P.sub.toUpperCase(), { "font-size": 21, class: "rot-sub" }, g);
+    texto(P.x0 + 20, 126, `${P.motor} · ${P.vel}`, { "font-size": 18, class: "rot-dato rot-opcional" }, g);
 
     // membrana (esquemática), a los costados del barril
     const ym0 = Y(MEMB[1]), ym1 = Y(MEMB[0]), banda = 5 * S;
     for (const [a, b] of [[P.x0 + 20, X(-26)], [X(26), P.x0 + 700]]) {
-      el("rect", { x: a, y: ym0, width: b - a, height: ym1 - ym0, fill: C.memb }, g);
-      el("rect", { x: a, y: ym0, width: b - a, height: banda, fill: C.membBanda }, g);
-      el("rect", { x: a, y: ym1 - banda, width: b - a, height: banda, fill: C.membBanda }, g);
+      el("rect", { x: a, y: ym0, width: b - a, height: ym1 - ym0, class: "memb" }, g);
+      el("rect", { x: a, y: ym0, width: b - a, height: banda, class: "memb-banda" }, g);
+      el("rect", { x: a, y: ym1 - banda, width: b - a, height: banda, class: "memb-banda" }, g);
     }
-    texto((P.x0 + 20 + X(-26)) / 2, (ym0 + ym1) / 2 + 7, "membrana",
-          { "font-size": 20, fill: C.mut, "text-anchor": "middle" }, g);
-    texto(P.x0 + 20, Y(30), "cis", { "font-size": 20, fill: C.mut }, g);
-    texto(P.x0 + 20, Y(-80), "trans", { "font-size": 20, fill: C.mut }, g);
+    texto((P.x0 + 20 + X(-26)) / 2, (ym0 + ym1) / 2 + 6, "membrana",
+          { "font-size": 18, "text-anchor": "middle", class: "rot-etiqueta" }, g);
+    texto(P.x0 + 20, Y(30), "cis", { "font-size": 18, class: "rot-etiqueta" }, g);
+    texto(P.x0 + 20, Y(-80), "trans", { "font-size": 18, class: "rot-etiqueta" }, g);
 
     // halo de cada cabezal (constricción), DETRÁS de la proteína: ilumina sólo el canal
     for (const zc of P.cabezales) {
-      el("ellipse", { cx, cy: Y(zc), rx: 18 * S, ry: 8 * S, fill: C.luz, opacity: 0.55 }, g);
+      el("ellipse", { cx, cy: Y(zc), rx: 18 * S, ry: 8 * S, class: "halo" }, g);
     }
 
     // proteínas: corte real de 6SI7
-    for (const d of GEO.csgg) {
-      el("path", { d: trazo(d, cx), fill: C.csgg, stroke: C.csggBorde, "stroke-width": 1.5,
-                   "stroke-linejoin": "round" }, g);
-    }
+    for (const d of GEO.csgg) el("path", { d: trazo(d, cx), class: "csgg" }, g);
     if (P.csgf) {
-      for (const d of GEO.csgf) {
-        el("path", { d: trazo(d, cx), fill: C.csgf, stroke: C.csgfBorde, "stroke-width": 1.5,
-                     "stroke-linejoin": "round" }, g);
-      }
+      for (const d of GEO.csgf) el("path", { d: trazo(d, cx), class: "csgf" }, g);
     }
-    texto(X(-40), Y(10) + 8, "CsgG", { "font-size": 22, "font-weight": 700, fill: C.ink,
-                                       "text-anchor": "middle" }, g);
+    texto(X(-40), Y(10) + 7, "CsgG", { "font-size": 20, "text-anchor": "middle",
+                                       class: "rot-etiqueta rot-proteina" }, g);
     if (P.csgf) {
       // rótulo del péptido de CsgF, abajo a la izquierda, fuera de la membrana
-      guia("line", { x1: X(-24), y1: Y(-60), x2: P.x0 + 150, y2: Y(-60), stroke: C.mut,
-                   "stroke-width": 2 }, g);
+      guia("line", { x1: X(-24), y1: Y(-60), x2: P.x0 + 150, y2: Y(-60),
+                     class: "guia guia-opcional" }, g);
       texto(P.x0 + 20, Y(-60) - 8, ["péptido", "de CsgF"],
-            { "font-size": 20, "font-weight": 700, fill: C.ink2 }, g);
+            { "font-size": 19, class: "rot-clave rot-opcional" }, g);
     }
 
     // ---- motor: una helicasa (esquemática; ONT no publicó su estructura). Se dibuja la
     // arquitectura general: dos dominios motores con la hebra molde en la hendidura entre ellos,
     // y un dominio «cuña» en la horquilla que separa la doble hebra. La hebra complementaria
     // sale desplazada; la molde entra al poro.
-    // los dominios vienen en el bloque «geometria», con la misma textura que CsgG y CsgF
-    for (const [dominio, tono] of [["lobulo1", C.motor], ["lobulo2", C.motor2]]) {
-      for (const d of GEO.motor[dominio]) {
-        el("path", { d: trazo(d, cx), fill: tono, stroke: C.motorBorde, "stroke-width": 1.5,
-                     "stroke-linejoin": "round" }, g);
-      }
+    // los dominios vienen en el bloque «geometria»; el trazo punteado dice que son esquemáticos
+    for (const [dominio, clase] of [["lobulo1", "motor"], ["lobulo2", "motor motor--2"]]) {
+      for (const d of GEO.motor[dominio]) el("path", { d: trazo(d, cx), class: clase }, g);
     }
-    guia("line", { x1: X(-31), y1: Y(55), x2: P.x0 + 222, y2: Y(55), stroke: C.mut,
-                 "stroke-width": 2 }, g);
+    guia("line", { x1: X(-31), y1: Y(55), x2: P.x0 + 222, y2: Y(55),
+                   class: "guia guia-opcional" }, g);
     texto(P.x0 + 20, Y(55) - 40, [`helicasa (${P.motor})`],
-          { "font-size": 20, "font-weight": 700, fill: C.ink2 }, g);
+          { "font-size": 19, class: "rot-clave rot-opcional" }, g);
     texto(P.x0 + 20, Y(55) - 15, ["abre la doble hebra y", "hace avanzar el ADN"],
-          { "font-size": 19, fill: C.mut }, g);
+          { "font-size": 17, class: "rot-nota" }, g);
 
     // hebra molde: de la doble hebra, por la hendidura del motor, al poro
     const zArriba = 42 - (150 - 300) / S;       // la doble hebra empieza en y = 150 px
     el("polyline", { points: [[-4.5, zArriba], [-4.5, HORQUILLA], [0, HORQUILLA - 6], [0, -98]]
-                       .map(([x, z]) => `${X(x)},${Y(z)}`).join(" "),
-                     fill: "none", stroke: C.adn, "stroke-width": 3, "stroke-linejoin": "round" }, g);
+                       .map(([x, z]) => `${X(x)},${Y(z)}`).join(" "), class: "adn" }, g);
     const bases = Array.from({ length: 30 }, () => nuevaBase(g, true));
     // hebra complementaria: baja apareada hasta la horquilla y sale desplazada
     el("polyline", { points: [[4.5, zArriba], ...DESPLAZADA].map(([x, z]) => `${X(x)},${Y(z)}`).join(" "),
-                     fill: "none", stroke: C.adn, "stroke-width": 3, "stroke-linejoin": "round" }, g);
+                     class: "adn" }, g);
     const libres = Array.from({ length: 12 }, () => nuevaBase(g, true));
-    // cada par de la doble hebra: dos medias barras, con los colores de las bases complementarias
+    // cada par de la doble hebra: dos medias barras, la de la molde y la complementaria
     const pares = Array.from({ length: 7 }, () => [nuevaBase(g, false), nuevaBase(g, false)]);
     // la cuña, encima de la horquilla
-    for (const d of GEO.motor.cuna) {
-      el("path", { d: trazo(d, cx), fill: C.cuna, stroke: C.motorBorde, "stroke-width": 1.5,
-                   "stroke-linejoin": "round" }, g);
-    }
+    for (const d of GEO.motor.cuna) el("path", { d: trazo(d, cx), class: "cuna" }, g);
     const [xf, zf] = DESPLAZADA[DESPLAZADA.length - 1];
-    texto(X(xf) + 12, Y(zf) + 16, ["hebra", "complementaria"], { "font-size": 18, fill: C.mut }, g);
+    texto(X(xf) + 12, Y(zf) + 16, ["hebra", "complementaria"], { "font-size": 17, class: "rot-nota" }, g);
 
-    // rótulo de los cabezales
+    // rótulo de los cabezales, en el rojo de lo que se lee
     const xa = X(60);
     for (const zc of P.cabezales) {
-      guia("line", { x1: X(15), y1: Y(zc), x2: xa, y2: Y(zc), stroke: C.ink2, "stroke-width": 2 }, g);
+      guia("line", { x1: X(15), y1: Y(zc), x2: xa, y2: Y(zc), class: "guia guia--cabezal" }, g);
     }
     if (P.cabezales.length > 1) {
       guia("line", { x1: xa, y1: Y(P.cabezales[0]), x2: xa, y2: Y(P.cabezales[1]),
-                   stroke: C.ink2, "stroke-width": 2 }, g);
+                     class: "guia guia--cabezal" }, g);
     }
     const ym = P.cabezales.reduce((a, b) => a + Y(b), 0) / P.cabezales.length;
-    texto(xa + 10, ym - 6, P.etiqueta, { "font-size": 24, "font-weight": 700, fill: C.ink2 }, g);
+    texto(xa + 10, ym - 6, P.etiqueta, { "font-size": 22, class: "rot-clave rot-cabezal" }, g);
 
     // señal
     const tx0 = P.x0 + 20, tx1 = P.x0 + 700, ty0 = 822, ty1 = 935;
-    texto(tx0, 808, "señal eléctrica (ilustrativa)", { "font-size": 20, fill: C.mut }, g);
-    el("line", { x1: tx0, y1: ty1, x2: tx1, y2: ty1, stroke: C.grilla, "stroke-width": 2 }, g);
-    const traza = el("polyline", { fill: "none", stroke: C.ink2, "stroke-width": 2.2,
-                                   "stroke-linejoin": "round" }, g);
-    const llave = guia("path", { fill: "none", stroke: C.luzBase, "stroke-width": 2.5 }, g);
+    texto(tx0, 806, "señal eléctrica (ilustrativa)", { "font-size": 17, class: "rot-etiqueta" }, g);
+    el("line", { x1: tx0, y1: ty0, x2: tx1, y2: ty0, class: "eje eje--fino" }, g);
+    el("line", { x1: tx0, y1: ty1, x2: tx1, y2: ty1, class: "eje" }, g);
+    const traza = el("polyline", { class: "traza" }, g);
+    const llave = guia("path", { class: "llave" }, g);
     const llaveTxt = texto(0, 978, "homopolímero AAAAAAA",
-                           { "font-size": 19, "font-weight": 700, fill: C.luzBase,
-                             "text-anchor": "middle" }, g);
+                           { "font-size": 17, "text-anchor": "middle", class: "rot-llave rot-opcional" }, g);
 
     return { P, X, bases, libres, pares, zArriba, traza, llave, llaveTxt, tx0, tx1, ty0, ty1 };
   });
+
+  // ---- encuadre: en pantalla angosta los dos paneles dejan la letra en unos 5 px, así que
+  // queda el del R10.4.1 solo. La versión estática no cambia: es para exportar figuras.
+  const ANGOSTA = matchMedia("(max-width: 639px)");
+  function encuadrar() {
+    const compacto = ANGOSTA.matches && !ESTATICO;
+    document.body.classList.toggle("compacto", compacto);
+    svg.setAttribute("viewBox", compacto ? VISTA_COMPACTA : VISTA);
+  }
+  encuadrar();
+  ANGOSTA.addEventListener("change", encuadrar);
 
   // ---- un cuadro: p = bases que ya pasaron por el primer cabezal (continuo)
   const VENTANA = 8;             // Å a cada lado del cabezal que «lee» (unas 5 bases)
@@ -357,23 +461,24 @@
         const b = b0 - k, z = ZG + (b - p) * ANG_BASE;
         const visible = z > -98 && z < HORQUILLA - 6;
         const leida = D.P.cabezales.some(zc => Math.abs(z - zc) <= VENTANA);
-        ponerBase(B, D.X, 0, z, 1, 0, M_SIMPLE, ANCHO_SIMPLE, visible ? baseEn(b) : null, leida);
+        ponerBase(B, D.X, 0, z, 1, 0, M_SIMPLE, ANCHO_SIMPLE, visible ? baseEn(b) : null,
+                  leida ? "base base--leida" : "base");
       });
       // doble hebra, 3,4 Å por par: la base b sigue apareada hasta llegar a la horquilla
       const bf = Math.ceil(p + U_HORQUILLA);      // la primera base todavía apareada
       D.pares.forEach(([molde, compl], k) => {
         const b = bf + k, z = HORQUILLA + (b - p - U_HORQUILLA) * ANG_PAR;
         const visible = z > HORQUILLA + 0.5 && z < D.zArriba;
-        ponerBase(molde, D.X, -2.6, z, 1, 0, M_PAR, ANCHO_PAR, visible ? baseEn(b) : null, false);
+        ponerBase(molde, D.X, -2.6, z, 1, 0, M_PAR, ANCHO_PAR, visible ? baseEn(b) : null, "base");
         ponerBase(compl, D.X, 2.6, z, 1, 0, M_PAR, ANCHO_PAR,
-                  visible ? COMPLEMENTO[baseEn(b)] : null, false);
+                  visible ? COMPLEMENTO[baseEn(b)] : null, "base base--compl");
       });
       // hebra complementaria ya abierta: la pareja de la base b se aleja de la horquilla
       D.libres.forEach((B, k) => {
         const b = bf - 1 - k, q = sobreDesplazada((p + U_HORQUILLA - b) * ANG_BASE);
-        if (!q) { ponerBase(B, D.X, 0, 0, 1, 0, 0, 0, null, false); return; }
+        if (!q) { ponerBase(B, D.X, 0, 0, 1, 0, 0, 0, null, "base"); return; }
         const [x, z, nx, nz] = q;
-        ponerBase(B, D.X, x, z, nx, nz, M_SIMPLE, ANCHO_SIMPLE, COMPLEMENTO[baseEn(b)], false);
+        ponerBase(B, D.X, x, z, nx, nz, M_SIMPLE, ANCHO_SIMPLE, COMPLEMENTO[baseEn(b)], "base base--compl");
       });
       const mAhora = Math.floor(p * MUESTRAS), nCab = D.P.cabezales.length, pts = [];
       for (let j = 0; j < W; j++) {
@@ -425,6 +530,7 @@
   cuadro(p);
   actualizarBoton();
   if (!ESTATICO) requestAnimationFrame(bucle);
+
 })();
 </script>
 </body>
