@@ -24,7 +24,6 @@ dos reemplazantes son libres (OFL) y se sirven desde `fonts/`, sin Google Fonts.
 index.html               la página
 styles.css               toda la hoja de estilos
 privacidad.html          política de privacidad (Ley 25.326): describe lo que el sitio hace de verdad
-poro.html                animación completa del nanoporo (PDB 6SI7); ?estatico para figuras
 404.html                 GitHub Pages la sirve para cualquier ruta inexistente
 favicon.svg              logo con trazos gruesos, para 16-32 px
 apple-touch-icon.png     180×180, también es el logo del JSON-LD
