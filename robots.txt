@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kmer-labs.com.ar/sitemap.xml

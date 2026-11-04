@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- El logo de la tarjeta con trazos más gruesos, para que se lea a 16px.
+       El fondo blanco hace que la línea central no desaparezca en pestañas oscuras. -->
+  <rect width="100" height="100" fill="#fff"/>
+  <path fill="#8E1322" d="M0 0A50 50 0 0 0 50 50H0Z"/>
+  <path fill="#8E1322" d="M100 0V100A50 50 0 0 0 50 50A50 50 0 0 0 100 0Z"/>
+  <path stroke="#231F20" stroke-width="6" d="M50 0V100"/>
+  <path fill="none" stroke="#8E1322" stroke-width="8" d="M4 4H96V96H4Z"/>
+</svg>

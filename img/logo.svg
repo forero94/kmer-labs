@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="K-mer Labs">
+  <!-- Logo de K-mer Labs, reconstruido de la tarjeta (Tarjeta de presentacion.pdf).
+       Un cuadrado de lado 100: el cuarto superior izquierdo sin el cuarto de círculo
+       centrado arriba, y la mitad derecha sin los dos cuartos de círculo centrados
+       arriba y abajo. Las dos curvas se tocan en el centro y dibujan la K. -->
+  <path fill="#8E1322" d="M0 0A50 50 0 0 0 50 50H0Z"/>
+  <path fill="#8E1322" d="M100 0V100A50 50 0 0 0 50 50A50 50 0 0 0 100 0Z"/>
+  <path stroke="#231F20" stroke-width="1.9" d="M50 0V100"/>
+  <path fill="none" stroke="#8E1322" stroke-width="1.9" d="M.95 .95H99.05V99.05H.95Z"/>
+</svg>

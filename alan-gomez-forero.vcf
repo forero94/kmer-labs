@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Gómez Forero;Alan;;;
+FN:Alan Gómez Forero
+ORG:K-mer Labs
+TITLE:Fundador
+TEL;TYPE=CELL,VOICE:+54 9 11 6164-0251
+EMAIL;TYPE=INTERNET,WORK:alan@kmer-labs.com.ar
+URL:https://kmer-labs.com.ar
+NOTE:Genética médica y tecnología clínica · M.N. 185573
+END:VCARD
