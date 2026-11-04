@@ -635,7 +635,7 @@ body { counter-reset: seccion; }
 /* ---------- Servicios ---------- */
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+    grid-template-columns: 1fr;
     gap: 1.25rem;
     margin-top: 2.5rem;
 }
@@ -665,27 +665,27 @@ body { counter-reset: seccion; }
 
 .card p { font-size: 1rem; color: var(--ink-soft); margin: 0; }
 
-.card__stack {
-    margin-top: auto;
-    padding-top: .9rem;
-    border-top: 1px solid var(--rule);
-    font-size: .92rem;
-    line-height: 1.55;
+/* Son cinco: en dos columnas la última ocupa el ancho entero, y en la pantalla
+   ancha quedan dos arriba y tres abajo sobre una grilla de seis */
+@media (min-width: 44rem) {
+    .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card:last-child:nth-child(odd) { grid-column: 1 / -1; }
 }
 
-/* «YA CONSTRUIDO» como rótulo de ficha técnica, y abajo la prueba en letra normal */
-.card__meta {
-    display: block;
-    margin-bottom: .35rem;
-    font-family: var(--font-mono);
-    font-size: .68rem;
-    font-weight: 500;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--accent);
+/* Número, título y texto comparten filas con las tarjetas vecinas: si un título
+   ocupa dos líneas, las descripciones siguen empezando a la misma altura */
+@media (min-width: 62rem) {
+    .cards { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .card {
+        grid-column: span 2;
+        grid-row: span 3;
+        display: grid;
+        grid-template-rows: subgrid;
+        row-gap: .75rem;
+    }
+    .card:nth-child(-n + 2) { grid-column: span 3; }
+    .card:last-child:nth-child(odd) { grid-column: span 2; }
 }
-
-.card .card__stack { color: var(--ink-muted); }
 
 /* ---------- Para quién ---------- */
 /* Cuatro columnas en la pantalla ancha, cada una bajo una línea roja corta,
@@ -788,6 +788,10 @@ body { counter-reset: seccion; }
     display: grid;
     grid-template-columns: 2.5rem minmax(0, 1fr);
     column-gap: 1rem;
+    /* título, texto y resultado: filas compartidas con el paso de al lado */
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    row-gap: 0;
 }
 
 .steps__item > * { grid-column: 2; }
@@ -804,7 +808,27 @@ body { counter-reset: seccion; }
 }
 
 .steps__item h3 { font-size: 1.3rem; line-height: 1.35; margin-bottom: .5rem; }
-.steps__item p { color: var(--ink-soft); }
+.steps__item p { color: var(--ink-soft); margin: 0; }
+
+/* Con qué cierra cada etapa: rótulo en mono, como los de sección */
+.steps__item .steps__out {
+    margin: 1.1rem 0 0;
+    padding-top: .85rem;
+    border-top: 1px solid var(--rule);
+    font-size: .95rem;
+    color: var(--ink);
+}
+
+.steps__out span {
+    display: block;
+    margin-bottom: .3rem;
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
 
 /* ---------- Seguridad y datos: la franja oscura ---------- */
 /* Tinta de la tarjeta de fondo, con colores fijos: en el tema oscuro sigue

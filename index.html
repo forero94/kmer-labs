@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K-mer Labs | Software clínico a medida</title>
     <meta name="description"
-        content="K-mer Labs diseña y desarrolla software clínico a medida para servicios de salud, consultorios, laboratorios e instituciones: gestión de pacientes y turnos, herramientas para la consulta y análisis de datos.">
+        content="K-mer Labs diseña y desarrolla software clínico a medida para servicios de salud, consultorios, laboratorios e instituciones: gestión de pacientes y turnos, circuitos de laboratorio, herramientas para la consulta, investigación y formación.">
 
     <link rel="canonical" href="https://kmer-labs.com.ar/">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -39,7 +39,7 @@
     <link rel="preload" href="fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
     <!-- ?v=: GitHub Pages deja que el navegador guarde CSS y JS 10 minutos. Al cambiarlos,
          subir el número: si no, el HTML nuevo se ve un rato con los estilos viejos. -->
-    <link rel="stylesheet" href="styles.css?v=12">
+    <link rel="stylesheet" href="styles.css?v=18">
 
     <script type="application/ld+json">
     {
@@ -182,54 +182,61 @@
         <section class="section" id="servicios">
             <div class="wrap">
                 <p class="section__label">Qué hacemos</p>
-                <h2 class="section__title">Herramientas para el trabajo real de un equipo de salud</h2>
+                <h2 class="section__title">Software para el trabajo diario de un equipo de salud</h2>
                 <p class="lead">
-                    Cada proyecto parte de un problema concreto del servicio, no de un producto genérico.
-                    Trabajamos con cualquier especialidad; debajo de cada área figura lo que ya desarrollamos.
+                    Cada proyecto parte de un problema concreto del servicio y se diseña junto con el equipo
+                    que lo va a usar. Trabajamos con cualquier especialidad.
                 </p>
 
+                <!-- Cinco áreas: en la pantalla ancha, las dos de sistemas arriba y las tres de
+                     apoyo abajo (la grilla está en styles.css). -->
                 <div class="cards">
                     <article class="card">
                         <p class="card__num">01</p>
                         <h3>Gestión clínica</h3>
                         <p>
-                            Registro de pacientes, historia clínica, turnos y seguimiento, modelados a partir del
-                            circuito asistencial real del servicio y no de una plantilla genérica. Desarrollo
-                            completo: base de datos, interfaz, instalación y mantenimiento.
+                            Registro de pacientes, historia clínica, turnos, interconsultas y seguimiento, modelados
+                            a partir del circuito asistencial real del servicio y no de una plantilla genérica.
                         </p>
-                        <p class="card__stack"><span class="card__meta">Ya construido</span>La gestión de familias, casos y turnos de un servicio de genética</p>
                     </article>
 
                     <article class="card">
                         <p class="card__num">02</p>
+                        <h3>Laboratorio</h3>
+                        <p>
+                            Trazabilidad de punta a punta: pedidos, ingreso y seguimiento de muestras, carga de
+                            resultados e informes que llegan al médico que los solicitó.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <p class="card__num">03</p>
                         <h3>Herramientas para la atención</h3>
                         <p>
                             Formularios estructurados, calculadoras, diagramas y diagnósticos codificados con
                             terminologías estándar, para que la información quede disponible para búsquedas y
                             análisis en lugar de quedar en texto libre.
                         </p>
-                        <p class="card__stack"><span class="card__meta">Ya construido</span>Un constructor de árboles familiares de uso libre · <a href="#ejemplo">ver ejemplo</a></p>
-                    </article>
-
-                    <article class="card">
-                        <p class="card__num">03</p>
-                        <h3>Datos y análisis</h3>
-                        <p>
-                            Integración de datos dispersos en planillas y sistemas, tableros de seguimiento de la
-                            actividad del servicio y análisis reproducibles en la infraestructura de la institución.
-                        </p>
-                        <p class="card__stack"><span class="card__meta">Ya construido</span>Análisis de secuenciación de lecturas largas (Oxford Nanopore) en clúster</p>
                     </article>
 
                     <article class="card">
                         <p class="card__num">04</p>
+                        <h3>Datos e investigación</h3>
+                        <p>
+                            Integración de datos dispersos en planillas y sistemas, registros de pacientes y bases
+                            para estudios de cualquier diseño, tableros de actividad y análisis reproducibles en
+                            la infraestructura de la institución.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <p class="card__num">05</p>
                         <h3>Formación</h3>
                         <p>
                             Plataformas de estudio con tarjetas y repetición espaciada, y campus virtuales con clases,
                             material de consulta en línea y registro de accesos, para residencias, cursos y equipos
                             que forman profesionales.
                         </p>
-                        <p class="card__stack"><span class="card__meta">Ya construido</span>Una plataforma de estudio con repetición espaciada y un campus virtual para un curso anual de genética</p>
                     </article>
                 </div>
             </div>
@@ -241,7 +248,7 @@
         <section class="section section--sunken" id="para-quien">
             <div class="wrap">
                 <p class="section__label">Para quién</p>
-                <h2 class="section__title">Para equipos que atienden, estudian o forman</h2>
+                <h2 class="section__title">Para equipos que atienden, estudian y forman</h2>
 
                 <ul class="audience">
                     <li>
@@ -268,8 +275,8 @@
                     <li>
                         <h3>Investigación y docencia</h3>
                         <p>
-                            Registros de pacientes y cohortes, bases para estudios, análisis reproducibles y
-                            plataformas para residencias y cursos.
+                            Registros de pacientes, bases para estudios de cualquier diseño, análisis
+                            reproducibles y plataformas para residencias y cursos.
                         </p>
                     </li>
                 </ul>
@@ -369,38 +376,54 @@
             <div class="wrap">
                 <p class="section__label">Cómo trabajamos</p>
                 <h2 class="section__title">Primero entender el servicio, después escribir código</h2>
+                <p class="lead">
+                    Cada etapa termina con un resultado concreto que el equipo revisa antes de pasar a la
+                    siguiente.
+                </p>
 
+                <!-- Cada paso: qué se hace y, abajo, con qué se cierra. En dos columnas los
+                     resultados de la misma fila quedan a la misma altura (subgrid). -->
                 <ol class="steps">
                     <li class="steps__item">
                         <h3>Relevamiento</h3>
                         <p>
-                            Analizamos cómo trabaja hoy el equipo: qué se registra, dónde se duplican datos y en
-                            qué punto del circuito se pierde el seguimiento de un paciente.
+                            Analizamos cómo trabaja hoy el equipo, junto con quienes sostienen el circuito:
+                            profesionales, personal administrativo y técnico. Revisamos qué se registra y dónde, qué
+                            planillas y formularios se usan, dónde se duplican datos y en qué punto se pierde el
+                            seguimiento de un paciente.
                         </p>
+                        <p class="steps__out"><span>Resultado</span>Un mapa del circuito actual, los problemas
+                            ordenados por prioridad y el alcance propuesto para el proyecto.</p>
                     </li>
-
                     <li class="steps__item">
                         <h3>Prototipo</h3>
                         <p>
                             Antes de comprometer meses de desarrollo, el equipo prueba una versión funcional con
-                            datos de prueba y define los ajustes.
+                            datos de prueba, armada sobre sus propios pasos y formularios. Es el momento más barato
+                            para descubrir qué falta, qué sobra y qué no se va a usar.
                         </p>
+                        <p class="steps__out"><span>Resultado</span>El alcance validado por el equipo: las
+                            pantallas, los datos y los pasos que va a tener el sistema.</p>
                     </li>
-
                     <li class="steps__item">
                         <h3>Desarrollo iterativo</h3>
                         <p>
-                            La herramienta se ajusta con el uso cotidiano hasta integrarse a la rutina del
-                            servicio.
+                            El sistema se construye en entregas parciales, cada una usable por sí sola, empezando por
+                            la parte del circuito que más tiempo consume. Cada entrega se ajusta con el uso cotidiano
+                            y, si hay planillas o sistemas previos, sus datos se migran al nuevo.
                         </p>
+                        <p class="steps__out"><span>Resultado</span>El sistema completo, integrado a la rutina del
+                            servicio.</p>
                     </li>
-
                     <li class="steps__item">
                         <h3>Implementación y soporte</h3>
                         <p>
-                            Instalación en la infraestructura elegida, código documentado y mantenimiento
-                            acordado desde el inicio.
+                            Instalación en la infraestructura que elija la institución, sus propios servidores o la
+                            nube, y capacitación de quienes lo van a usar. El código y el funcionamiento quedan
+                            documentados, para que el sistema no dependa de quien lo escribió.
                         </p>
+                        <p class="steps__out"><span>Resultado</span>El sistema en funcionamiento, con un
+                            mantenimiento acordado desde el inicio: qué incluye y por cuánto tiempo.</p>
                     </li>
                 </ol>
             </div>
@@ -427,7 +450,11 @@
                             <path d="M5 12.5l4.5 4.5L19 7.5" />
                         </svg>
                         <h3>Acceso por rol</h3>
-                        <p>Cada usuario ve y modifica sólo lo que su función requiere.</p>
+                        <p>
+                            Cada usuario ve y modifica sólo lo que su función requiere: administración,
+                            profesionales y laboratorio tienen permisos distintos, que define la institución. Las
+                            cuentas son personales y se dan de baja cuando alguien deja el servicio.
+                        </p>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -435,7 +462,11 @@
                             <path d="M5 12.5l4.5 4.5L19 7.5" />
                         </svg>
                         <h3>Registro de auditoría</h3>
-                        <p>Queda registrado quién consultó o modificó cada dato, y cuándo.</p>
+                        <p>
+                            Queda registrado quién consultó o modificó cada dato, y cuándo. Una corrección no borra
+                            lo anterior: cada versión queda guardada, para preservar la integridad de la historia
+                            clínica.
+                        </p>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -443,7 +474,11 @@
                             <path d="M5 12.5l4.5 4.5L19 7.5" />
                         </svg>
                         <h3>Cifrado</h3>
-                        <p>La información viaja cifrada y se almacena cifrada.</p>
+                        <p>
+                            La información viaja cifrada y se almacena cifrada, también en las copias de
+                            seguridad. Las contraseñas se guardan de forma irreversible: ni quien administra el
+                            sistema puede leerlas.
+                        </p>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -451,7 +486,10 @@
                             <path d="M5 12.5l4.5 4.5L19 7.5" />
                         </svg>
                         <h3>Copias de seguridad</h3>
-                        <p>Respaldos automáticos, con restauración probada periódicamente.</p>
+                        <p>
+                            Respaldos automáticos, guardados fuera del servidor principal, y restauración probada
+                            periódicamente: un respaldo que nunca se restauró no está comprobado.
+                        </p>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -459,7 +497,11 @@
                             <path d="M5 12.5l4.5 4.5L19 7.5" />
                         </svg>
                         <h3>Datos bajo control de la institución</h3>
-                        <p>Se alojan en sus propios servidores o en la nube que elija.</p>
+                        <p>
+                            Se alojan en sus propios servidores o en la nube que elija, y son de la institución:
+                            puede exportarlos completos, en formatos abiertos, en cualquier momento, también si
+                            decide dejar de usar el sistema.
+                        </p>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -467,7 +509,12 @@
                             <path d="M5 12.5l4.5 4.5L19 7.5" />
                         </svg>
                         <h3>Desarrollo con datos de prueba</h3>
-                        <p>Los datos reales de pacientes no salen del entorno que la institución autoriza.</p>
+                        <p>
+                            Los datos reales de pacientes no salen del entorno que la institución autoriza. El
+                            desarrollo y las pruebas se hacen con datos ficticios, y el acceso al sistema en uso
+                            para dar soporte se limita a lo que la institución habilite y queda en el registro de
+                            auditoría.
+                        </p>
                     </li>
                 </ul>
 
