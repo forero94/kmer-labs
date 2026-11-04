@@ -52,7 +52,7 @@ y abrir <http://127.0.0.1:8765>. Con `file://` las tipografías no cargan en Fir
 El DNS ya está hecho en Cloudflare: los A y AAAA de GitHub Pages, `www` →
 `forero94.github.io` y el TXT de verificación del dominio en GitHub (no borrarlo).
 Todo en gris («DNS only»): con la nube naranja GitHub no puede emitir ni renovar
-el certificado. El correo (`alan@` por Email Routing, envío por Brevo) usa el mismo
+el certificado. El correo (`contacto@`, el de la web, y `alan@`, por Email Routing; envío por Brevo) usa el mismo
 DNS; cualquier servicio nuevo que mande mails como `@kmer-labs.com.ar` tiene que
 autenticarse ahí antes, o cae en spam.
 
