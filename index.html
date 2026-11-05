@@ -39,7 +39,7 @@
     <link rel="preload" href="fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
     <!-- ?v=: GitHub Pages deja que el navegador guarde CSS y JS 10 minutos. Al cambiarlos,
          subir el número: si no, el HTML nuevo se ve un rato con los estilos viejos. -->
-    <link rel="stylesheet" href="styles.css?v=20">
+    <link rel="stylesheet" href="styles.css?v=21">
 
     <script type="application/ld+json">
     {
@@ -280,94 +280,6 @@
                         </p>
                     </li>
                 </ul>
-            </div>
-        </section>
-
-        <!-- ============ Un ejemplo ============ -->
-        <!-- Una herramienta chica y pública que muestra cómo trabajamos. Es de genética
-             porque es lo que hay hecho; la sección vale para cualquier especialidad. -->
-        <section class="section" id="ejemplo">
-            <div class="wrap">
-                <div class="tool">
-                    <div>
-                        <p class="section__label">Ejemplo</p>
-                        <h2 class="section__title">Constructor de árboles familiares</h2>
-                        <p class="lead">
-                            Una herramienta pública y de uso libre, desarrollada para la consulta de genética:
-                            dibuja árboles familiares con la notación estándar —afectados, portadores, gemelos,
-                            consanguinidad— y los exporta en PNG. Funciona íntegramente en el navegador: los datos
-                            cargados no se envían a ningún servidor.
-                        </p>
-                        <div class="btn-row">
-                            <a class="btn btn--primary" href="https://alangomezforero.com.ar/arbol/">
-                                Abrir el constructor
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M5 12h14M13 6l6 6-6 6" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Tres generaciones con la notación estándar: el tío materno afectado y
-                         fallecido, la abuela y la madre portadoras, el paciente señalado con la
-                         flecha y, con el aro, la hermana, que es a quien hay que asesorar. -->
-                    <figure class="tool__figure">
-                        <svg class="ped" viewBox="76 16 228 252" role="img"
-                            aria-label="Árbol familiar de ejemplo en tres generaciones. El tío materno es un varón afectado y fallecido; la abuela y la madre son portadoras; el paciente es un varón afectado y su hermana está señalada para asesoramiento.">
-                            <!-- I: los abuelos maternos -->
-                            <rect class="tr" x="93" y="23" width="34" height="34" />
-                            <circle class="tr" cx="190" cy="40" r="17" />
-                            <circle class="tc" cx="190" cy="40" r="4.5" />
-                            <path class="tr" d="M127 40H173M150 40V95M110 95H190M110 95V113M190 95V113" />
-                            <!-- II: el tío, la madre y el padre -->
-                            <rect class="tf" x="93" y="113" width="34" height="34" />
-                            <path class="tr" d="M85 155L135 105" />
-                            <circle class="tr" cx="190" cy="130" r="17" />
-                            <circle class="tc" cx="190" cy="130" r="4.5" />
-                            <rect class="tr" x="253" y="113" width="34" height="34" />
-                            <path class="tr" d="M207 130H253M230 130V185M190 185H270M190 185V203M270 185V203" />
-                            <!-- III: la hermana y el paciente -->
-                            <circle class="tr" cx="190" cy="220" r="17" />
-                            <circle class="tr tr--accent" cx="190" cy="220" r="26" />
-                            <rect class="tf" x="253" y="203" width="34" height="34" />
-                            <path class="tr tr--accent" d="M235 249L250 234" />
-                            <path class="tf--accent" d="M250 234L242 236L248 242z" />
-                            <text class="tl" x="190" y="248" dy="1em">Hermana</text>
-                            <text class="tl tl--proband" x="270" y="242" dy="1em">Paciente</text>
-                        </svg>
-
-                        <ul class="legend" aria-label="Cómo leer el árbol">
-                            <li>
-                                <svg viewBox="0 0 20 20" aria-hidden="true">
-                                    <rect x="2" y="2" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" />
-                                </svg>Varón
-                            </li>
-                            <li>
-                                <svg viewBox="0 0 20 20" aria-hidden="true">
-                                    <circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="1.6" />
-                                </svg>Mujer
-                            </li>
-                            <li>
-                                <svg viewBox="0 0 20 20" aria-hidden="true">
-                                    <rect x="2" y="2" width="16" height="16" fill="currentColor" />
-                                </svg>Afectado
-                            </li>
-                            <li>
-                                <svg viewBox="0 0 20 20" aria-hidden="true">
-                                    <circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="1.6" />
-                                    <circle cx="10" cy="10" r="3" fill="currentColor" />
-                                </svg>Portadora
-                            </li>
-                            <li>
-                                <svg viewBox="0 0 20 20" aria-hidden="true">
-                                    <rect x="3" y="3" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" />
-                                    <line x1="1" y1="19" x2="19" y2="1" stroke="currentColor" stroke-width="1.6" />
-                                </svg>Fallecido
-                            </li>
-                        </ul>
-                    </figure>
-                </div>
             </div>
         </section>
 

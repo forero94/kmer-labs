@@ -92,8 +92,6 @@
     --brand-hover: #6f0e1a;
 
     /* Árbol familiar: el lenguaje canónico es blanco y negro */
-    --ped-line: #4a4446;
-    --ped-fill: #231f20;
 
     /* La retícula de fondo y las líneas de construcción del logo */
     --grid: rgba(35, 31, 32, .07);
@@ -141,8 +139,6 @@
         --mark-red: #c23345;
         --mark-line: #f3eeee;
 
-        --ped-line: #cdc5c6;
-        --ped-fill: #f3eeee;
 
         --grid: rgba(243, 238, 238, .06);
         --guide: rgba(243, 238, 238, .3);
@@ -172,8 +168,6 @@
     --mark-red: #c23345;
     --mark-line: #f3eeee;
 
-    --ped-line: #cdc5c6;
-    --ped-fill: #f3eeee;
 
     --grid: rgba(243, 238, 238, .06);
     --guide: rgba(243, 238, 238, .3);
@@ -707,70 +701,6 @@ body { counter-reset: seccion; }
 .audience h3 { font-size: 1.25rem; margin-bottom: .6rem; }
 .audience p { margin: 0; font-size: 1rem; color: var(--ink-soft); }
 
-/* ---------- La herramienta: constructor de árboles ---------- */
-.tool {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    gap: clamp(2rem, 6vw, 4.5rem);
-    align-items: center;
-}
-
-@media (max-width: 46rem) {
-    .tool { grid-template-columns: minmax(0, 1fr); }
-}
-
-.tool .lead { margin-bottom: 2rem; }
-
-.tool__figure {
-    margin: 0;
-    background: var(--paper-raised);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    padding: clamp(1.25rem, 4vw, 2rem);
-    box-shadow: var(--shadow);
-}
-
-.ped { display: block; width: 100%; height: auto; }
-
-.ped .tr {
-    fill: none;
-    stroke: var(--ped-line);
-    stroke-width: 1.4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.ped .tf { fill: var(--ped-fill); stroke: var(--ped-line); stroke-width: 1.4; }
-.ped .tc { fill: var(--ped-line); }
-.ped .tr--accent { stroke: var(--accent); stroke-width: 1.6; }
-.ped .tf--accent { fill: var(--accent); stroke: none; }
-
-.ped .tl {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 500;
-    fill: var(--ink-muted);
-    text-anchor: middle;
-}
-
-.ped .tl--proband { fill: var(--accent); font-weight: 600; }
-
-/* Leyenda de símbolos: para leer el árbol de al lado */
-.legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem 1.25rem;
-    margin: 1.25rem 0 0;
-    padding: 1rem 0 0;
-    border-top: 1px solid var(--rule);
-    font-size: .8rem;
-    color: var(--ink-muted);
-    list-style: none;
-}
-
-.legend li { display: flex; align-items: center; gap: .4rem; }
-.legend svg { width: 15px; height: 15px; flex-shrink: 0; }
-
 /* ---------- Cómo trabajamos ---------- */
 /* Los pasos: el número en el margen, en el renglón del título */
 .steps {
@@ -1096,9 +1026,7 @@ body { counter-reset: seccion; }
         .section .section__title,
         .section .lead,
         .audience li,
-        .facts,
         .steps__item,
-        .tool__figure,
         .card {
             animation: rise var(--ease-out) both;
             animation-timeline: view();   /* después del atajo: animation lo resetea */
