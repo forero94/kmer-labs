@@ -1,0 +1,48 @@
+# K-mer Labs
+
+> K-mer Labs diseña y desarrolla software clínico a medida para servicios de salud, consultorios, laboratorios e instituciones de Argentina. Lo dirige Alan Gómez Forero, médico (Universidad de Buenos Aires) y residente de Genética Médica en el Centro Nacional de Genética Médica, que además programa: el criterio de cada desarrollo es clínico además de técnico. Tiene sede en la Ciudad Autónoma de Buenos Aires.
+
+## Qué hace
+
+- **Gestión clínica:** registro de pacientes, historia clínica, turnos, interconsultas y seguimiento, modelados a partir del circuito asistencial real del servicio y no de una plantilla genérica.
+- **Laboratorio:** trazabilidad de punta a punta: pedidos, ingreso y seguimiento de muestras, carga de resultados e informes que llegan al médico que los solicitó.
+- **Herramientas para la atención:** formularios estructurados, calculadoras, diagramas y diagnósticos codificados con terminologías estándar, para que la información quede disponible para búsquedas y análisis en lugar de quedar en texto libre.
+- **Datos e investigación:** integración de datos dispersos en planillas y sistemas, registros de pacientes y bases para estudios de cualquier diseño, tableros de actividad y análisis reproducibles en la infraestructura de la institución.
+- **Formación:** plataformas de estudio con tarjetas y repetición espaciada, y campus virtuales con clases, material de consulta y registro de accesos, para residencias, cursos y equipos que forman profesionales.
+
+Trabaja con cualquier especialidad médica.
+
+## Para quién
+
+- Servicios hospitalarios: el circuito propio del servicio (interconsultas, turnos, seguimiento) y la información que el sistema general del hospital no contempla.
+- Consultorios y centros médicos: historia clínica, agenda y seguimiento a la medida de la especialidad, sin pagar por módulos que no se usan.
+- Laboratorios: del pedido al informe.
+- Investigación y docencia: registros de pacientes, bases para estudios, análisis reproducibles y plataformas para residencias y cursos.
+
+## Cómo trabaja
+
+1. Relevamiento del circuito actual con el equipo: qué se registra, dónde se duplican datos, dónde se pierde el seguimiento de un paciente.
+2. Prototipo funcional con datos de prueba, para validar el alcance antes de comprometer meses de desarrollo.
+3. Desarrollo iterativo en entregas parciales, cada una usable por sí sola, con migración de planillas o sistemas previos.
+4. Implementación en la infraestructura que elija la institución (servidores propios o nube), capacitación, documentación y un mantenimiento acordado desde el inicio.
+
+## Seguridad y datos
+
+Acceso por rol, registro de auditoría de cada consulta y modificación, cifrado en tránsito y en reposo (también en las copias de seguridad), respaldos automáticos fuera del servidor principal con restauración probada, y datos bajo control de la institución, exportables completos en formatos abiertos. El desarrollo se hace con datos ficticios. Los sistemas se diseñan para que la institución cumpla la Ley 25.326 de Protección de Datos Personales y la Ley 26.529 de Derechos del Paciente; con instituciones del exterior contemplan HIPAA y el RGPD. Estándares: HL7 FHIR, SNOMED CT, CIE-10 y HPO.
+
+## El nombre
+
+Un k-mer es cada uno de los fragmentos de k bases consecutivas que se pueden leer en una secuencia de ADN. De ahí el nombre, y también el método: un problema grande, resuelto en partes manejables.
+
+## Contacto
+
+- Correo: contacto@kmer-labs.com.ar
+- Teléfono y WhatsApp: +54 9 11 6164-0251
+- La primera reunión es sin compromiso: sirve para entender el problema y ver si tiene sentido avanzar.
+
+## Enlaces
+
+- [Sitio](https://kmer-labs.com.ar/): la página completa, con servicios, proceso, seguridad y contacto
+- [Política de privacidad](https://kmer-labs.com.ar/privacidad.html): qué datos trata el sitio (Ley 25.326)
+- [Alan Gómez Forero](https://alangomezforero.com.ar/): sitio personal del fundador
+- [LinkedIn de Alan Gómez Forero](https://www.linkedin.com/in/alangomezforero/)

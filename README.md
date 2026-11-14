@@ -32,6 +32,8 @@ alan-gomez-forero.vcf    el botón «Guardá mi contacto»
 img/logo.svg             el logo con las proporciones exactas de la tarjeta
 img/retrato.webp         480×480, el retrato de alangomezforero.com.ar; el CSS lo muestra en círculo
 fonts/                   Source Serif 4 y Barlow, sólo el subconjunto latino
+llms.txt                 resumen del sitio en Markdown para asistentes de IA (llmstxt.org):
+                         si cambia el texto de index.html, actualizarlo también
 CNAME, robots.txt, sitemap.xml
 ```
 

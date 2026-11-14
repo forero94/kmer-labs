@@ -41,30 +41,78 @@
          subir el número: si no, el HTML nuevo se ve un rato con los estilos viejos. -->
     <link rel="stylesheet" href="styles.css?v=21">
 
+    <!-- Datos estructurados. WebSite le da a Google el nombre del sitio en los resultados;
+         Organization y Person son lo que buscadores y asistentes de IA leen como ficha.
+         Todo lo que dice acá tiene que estar también en el texto visible de la página. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "K-mer Labs",
-      "url": "https://kmer-labs.com.ar",
-      "logo": "https://kmer-labs.com.ar/apple-touch-icon.png",
-      "slogan": "Software clínico a medida",
-      "description": "Diseño y desarrollo de software clínico a medida para servicios de salud, consultorios, laboratorios e instituciones.",
-      "email": "contacto@kmer-labs.com.ar",
-      "telephone": "+54 9 11 6164-0251",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Ciudad Autónoma de Buenos Aires",
-        "addressCountry": "AR"
-      },
-      "taxID": "20-38525768-7",
-      "founder": {
-        "@type": "Person",
-        "name": "Alan Gómez Forero",
-        "url": "https://alangomezforero.com.ar",
-        "image": "https://kmer-labs.com.ar/img/retrato.webp",
-        "sameAs": ["https://www.linkedin.com/in/alangomezforero/"]
-      }
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://kmer-labs.com.ar/#website",
+          "url": "https://kmer-labs.com.ar/",
+          "name": "K-mer Labs",
+          "alternateName": ["kmer-labs.com.ar", "K-mer Labs, software clínico a medida"],
+          "inLanguage": "es-AR",
+          "publisher": { "@id": "https://kmer-labs.com.ar/#org" }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://kmer-labs.com.ar/#org",
+          "name": "K-mer Labs",
+          "url": "https://kmer-labs.com.ar/",
+          "logo": "https://kmer-labs.com.ar/apple-touch-icon.png",
+          "image": "https://kmer-labs.com.ar/og.png",
+          "slogan": "Software clínico a medida",
+          "description": "Diseño y desarrollo de software clínico a medida para servicios de salud, consultorios, laboratorios e instituciones: gestión de pacientes y turnos, circuitos de laboratorio, herramientas para la consulta, investigación y formación. Lo dirige un médico que programa.",
+          "email": "contacto@kmer-labs.com.ar",
+          "telephone": "+54 9 11 6164-0251",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Ciudad Autónoma de Buenos Aires",
+            "addressCountry": "AR"
+          },
+          "areaServed": { "@type": "Country", "name": "Argentina" },
+          "taxID": "20-38525768-7",
+          "founder": { "@id": "https://kmer-labs.com.ar/#alan" },
+          "knowsAbout": [
+            "Software clínico", "Historia clínica electrónica", "Gestión de turnos",
+            "Sistemas de información de laboratorio", "Registros de pacientes",
+            "HL7 FHIR", "SNOMED CT", "CIE-10", "Human Phenotype Ontology (HPO)",
+            "Ley 25.326 de Protección de Datos Personales", "Ley 26.529 de Derechos del Paciente",
+            "Genética médica", "Bioinformática"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gestión clínica",
+                "description": "Registro de pacientes, historia clínica, turnos, interconsultas y seguimiento, modelados a partir del circuito asistencial real del servicio." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Laboratorio",
+                "description": "Trazabilidad de punta a punta: pedidos, ingreso y seguimiento de muestras, carga de resultados e informes que llegan al médico que los solicitó." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Herramientas para la atención",
+                "description": "Formularios estructurados, calculadoras, diagramas y diagnósticos codificados con terminologías estándar." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Datos e investigación",
+                "description": "Integración de datos dispersos, registros de pacientes, bases para estudios, tableros de actividad y análisis reproducibles." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Formación",
+                "description": "Plataformas de estudio con tarjetas y repetición espaciada, y campus virtuales para residencias, cursos y equipos de salud." } }
+            ]
+          }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://kmer-labs.com.ar/#alan",
+          "name": "Alan Gómez Forero",
+          "jobTitle": "Fundador",
+          "description": "Médico egresado de la Universidad de Buenos Aires, residente de Genética Médica en el Centro Nacional de Genética Médica y fundador de K-mer Labs.",
+          "url": "https://alangomezforero.com.ar",
+          "image": "https://kmer-labs.com.ar/img/retrato.webp",
+          "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universidad de Buenos Aires" },
+          "worksFor": { "@id": "https://kmer-labs.com.ar/#org" },
+          "sameAs": ["https://alangomezforero.com.ar", "https://www.linkedin.com/in/alangomezforero/"]
+        }
+      ]
     }
     </script>
 </head>
