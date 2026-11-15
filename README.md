@@ -26,6 +26,8 @@ styles.css               toda la hoja de estilos
 privacidad.html          política de privacidad (Ley 25.326): describe lo que el sitio hace de verdad
 404.html                 GitHub Pages la sirve para cualquier ruta inexistente
 favicon.svg              logo con trazos gruesos, para 16-32 px
+favicon.ico              16, 32 y 48 px, sacado de favicon.svg; respaldo para Bing y quien pida /favicon.ico
+favicon-192.png          192×192 (múltiplo de 48, como pide Google para el ícono de los resultados)
 apple-touch-icon.png     180×180, también es el logo del JSON-LD
 og.png                   1200×630, la vista previa al compartir el enlace
 alan-gomez-forero.vcf    el botón «Guardá mi contacto»
