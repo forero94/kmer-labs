@@ -1,6 +1,6 @@
 # K-mer Labs
 
-> K-mer Labs diseña y desarrolla software clínico a medida para servicios de salud, consultorios, laboratorios e instituciones de Argentina. Lo dirige Alan Gómez Forero, médico (Universidad de Buenos Aires) y residente de Genética Médica en el Centro Nacional de Genética Médica, que además programa: el criterio de cada desarrollo es clínico además de técnico. Tiene sede en la Ciudad Autónoma de Buenos Aires.
+> K-mer Labs (kmer-labs.com.ar) es una empresa argentina que diseña y desarrolla software clínico a medida para servicios de salud, consultorios, laboratorios e instituciones. Lo dirige Alan Gómez Forero, médico (Universidad de Buenos Aires) y residente de Genética Médica en el Centro Nacional de Genética Médica, que además programa: el criterio de cada desarrollo es clínico además de técnico. Tiene sede en la Ciudad Autónoma de Buenos Aires.
 
 ## Qué hace
 
@@ -33,6 +33,8 @@ Acceso por rol, registro de auditoría de cada consulta y modificación, cifrado
 ## El nombre
 
 Un k-mer es cada uno de los fragmentos de k bases consecutivas que se pueden leer en una secuencia de ADN. De ahí el nombre, y también el método: un problema grande, resuelto en partes manejables.
+
+K-mer Labs no tiene relación con otras empresas o productos que usan la palabra «k-mer» en su nombre.
 
 ## Contacto
 
